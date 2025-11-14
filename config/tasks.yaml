@@ -1,0 +1,86 @@
+fundamental_task:
+  description: >
+    Analyze the company's Financial report using the fundamental analysis tool.
+    Extract key financial information such as revenue trends, profitability
+    metrics, debt levels, cash flow statements, segment performance, and
+    risk factors. Use natural language queries to interact with the tool
+    and gather comprehensive data from the XML document. Ensure all
+    necessary financial data points are retrieved before formulating the
+    investment recommendation.
+  expected_output: >
+    A comprehensive fundamental analysis report including:
+      1) Key financial metrics extracted from the Financial (revenue, net income, EPS, debt-to-equity ratio),
+      2) Year-over-year growth trends and performance analysis,
+      3) Segment-wise business performance breakdown,
+      4) Critical risk factors and their potential impact,
+      5) Cash flow analysis and liquidity position,
+      6) Final BUY or SELL recommendation with justification and a confidence score between 1 and -1 where 1 denotes strongly BUY and -1 denotes strongly SELL. I do not want 0 as the output.
+  agent: fundamental_analyst
+
+valuation_task:
+  description: >
+    Analyze stock's historical performance by calculating
+    annualized returns and volatility. Assess risk-adjusted performance
+    and provide a clear BUY, or SELL recommendation with detailed
+    reasoning.
+  expected_output: >
+    A comprehensive valuation report including:
+      1) Annualized return percentage,
+      2) Annualized volatility percentage,
+      3) Risk-return analysis,
+      4) Final BUY or SELL recommendation with justification and a confidence score between 1 and -1 where 1 denotes strongly BUY and -1 denotes strongly SELL. I do not want 0 as the output.
+  agent: valuation_analyst
+
+sentiment_task:
+  description: >
+    Analyze recent news articles about given stock to gauge overall market
+    sentiment. Review the content for positive or negative indicators of
+    company performance, management decisions, and future prospects.
+    Provide a sentiment-driven investment recommendation.
+  expected_output: >
+    A sentiment analysis report including:
+      1) Summary of key news themes,
+      2) Overall sentiment assessment (positive/negative/neutral),
+      3) Key risks or opportunities identified,
+      4) Final BUY or SELL recommendation based on sentiment and a confidence score between 1 and -1 where 1 denotes strongly BUY and -1 denotes strongly SELL. I do not want 0 as the output.
+  agent: sentiment_analyst
+
+technical_task:
+  description: >
+    Conduct a comprehensive technical analysis of the company's stock.
+    Utilize price trend indicators, moving averages, RSI, and MACD to
+    evaluate short-term and medium-term momentum. Identify potential
+    support and resistance zones, trend reversals, and breakout signals.
+    Synthesize the technical indicators to produce a clear trading bias.
+  expected_output: >
+    A detailed technical analysis report including:
+      1) Summary of short-term and long-term moving averages (SMA, EMA),
+      2) RSI value and interpretation (overbought/oversold/neutral),
+      3) MACD line, signal line, and histogram analysis,
+      4) Identification of current trend direction (bullish/bearish/sideways),
+      5) Final BUY or SELL recommendation with justification and a confidence score between 1 and -1 where 1 denotes strongly BUY and -1 denotes strongly SELL. I do not want 0 as the output.
+  agent: technical_analyst
+
+investment_debate_task:
+  description: >
+    Moderate a structured debate between the Fundamental Analyst, Sentiment Analyst, Technical Analyst and
+    Valuation Analyst. Each analyst independently proposes a BUY or SELL position, defends their reasoning, challenges opposing views,
+    and responds to critiques. Ensure each analyst has at least two turns
+    to speak. The goal is to highlight the strengths and weaknesses of
+    each position and move toward a consensus recommendation.
+  expected_output: >
+    A transcript of the investment debate including:
+      - Clear BUY or SELL positions from each analyst,
+      - Supporting reasoning, challenges, and responses.
+  context: [valuation_task, sentiment_task, fundamental_task, technical_task]
+  agent: moderator
+
+investment_conclusion_task:
+  description: >
+    After the debate, carefully evaluate the discussion and provide a
+    final investment decision. Summarize all the arguments and
+    declare a clear confidence score which is weighted average of argument from every agent. Make use of the confidence score given by each agent and take its weighted average with respect to the arguments to calculate the final confidence score. I do not want 0 as the output
+  expected_output: >
+    Output exactly 2 words in the last line, first one is a identifier, named as CS787 and second a single real number between -1 and 1 where 1 denotes strongly buy it and -1 denotes strongly sell it, this is your confidence score. I want skewed numbers and not 0 or 1 or -1 everytime. even if one agent is saying BUY/SELL then the final confidence score should be slightly skewed towards +1/-1. I do not want 0 as the output.
+  context: [investment_debate_task]
+  agent: conclusion_agent
