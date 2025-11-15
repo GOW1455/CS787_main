@@ -20,7 +20,7 @@ This framework integrates **Semantic RAG**, **fundamental analysis**, **valuatio
 
 This repository substantially improves upon the AlphaAgents architecture described in the BlackRock paper. While the paper introduces a 3-agent system (Fundamental, Sentiment, Valuation) with a simple debate loop, this implementation adds **richer tools, more agents, stricter debate mechanics, superior RAG, technical indicators, and a fully automated consensus engine**.
 
-### ✅ 1. Expanded Agent Architecture (5 Analysts vs. 3 in Paper)
+### ✅ 1. Expanded Agent Architecture (4 Analysts + 2 Meta-Agents vs. 3 in Paper)
 The original paper only defines:
 - Fundamental Agent  
 - Valuation Agent  
@@ -50,7 +50,6 @@ Computes:
 - Weighted confidence score  
 - Final BUY/SELL  
 - Outputs strict 2-word final signal `CS787 <score>`
-
 ---
 
 ### ✅ 2. Stronger Debate System: Multi-Turn, Structured, Weighted Voting  
@@ -123,7 +122,7 @@ This makes the architecture **more modular, maintainable, and realistic**.
 
 # 🎯 Features
 
-### 🧠 Multi-Agent System (5 Analysts + 2 Meta-Agents)
+### 🧠 Multi-Agent System (4 Analysts + 2 Meta-Agents)
 AlphaAgent includes five specialized analysts:
 
 1. **Fundamental Analyst**  
