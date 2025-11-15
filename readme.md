@@ -229,6 +229,10 @@ CS787 `<real-number>`
 
 Where `<real-number>` ∈ **(-1, 1)** and is **never 0**.
 
+##  Agentic Workflow
+![Flowchart of Agents](documents/Flow.png)
+
+
 ## How to Run (in macOS):
 
 1) Clone the repository
