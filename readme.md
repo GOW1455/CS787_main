@@ -370,5 +370,5 @@ pip install uvicorn
 uvicorn app:app --reload --host 127.0.0.1 --port 8000
 ```
 5) Now the backend is up, can use index.html.
-6) Final output:
+6) Final output in website for BAJFINANCE.NS:
     ![Logo](documents/web_image.png)
