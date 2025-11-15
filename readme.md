@@ -291,3 +291,71 @@ This is for RELIANCE.NS, for e.g.
 
 15) The output is as shown:
     ![Logo](image.png)
+
+## How to run (in Windows):
+
+1) Clone the repository
+```bash
+git clone https://github.com/unordinarysubstance/CS787
+```
+3) Install `uv`
+```bash
+irm https://astral.sh/uv/install.ps1 | iex
+```
+Add this to your path manually `%USERPROFILE%\.local\bin`
+3) Verify:
+```bash
+uv --version
+```
+4) Install Python 3.13
+```bash
+uv install python@3.13
+```
+5) Verify:
+```bash
+python3.13 --version
+```
+6) Go inside the project
+7) Create Virtual Environment + Install Dependencies 
+```bash
+uv sync --python python3.13
+```
+8) Create Virtual Environment + Install Dependencies 
+```bash
+uv sync --python python3.13
+```
+9) Activate environment (optional):
+```bash
+.venv\Scripts\activate
+```
+10) Add API key:
+```bash
+echo "OPENAI_API_KEY=your_openai_api_key" >> .env
+```
+11) Verify:
+```bash
+cat .env
+```
+12) Install Missing Runtime Packages
+```bash
+uv pip install tavily-python
+uv pip install crewai
+uv pip install langchain_community
+```
+## How to Run website on the device:
+
+1) Get inside the repository
+2) Activate environment (optional):
+```bash
+source .venv/bin/activate
+```
+3) Install uvicorn
+```bash
+pip install uvicorn
+```
+4) Run the command:
+```bash
+uvicorn app:app --reload --host 127.0.0.1 --port 8000
+```
+5) Now the backend is up, can use index.html.
+
